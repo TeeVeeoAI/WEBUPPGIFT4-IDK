@@ -1,5 +1,6 @@
 function ToggleThemeD(){
     let html = document.getElementsByTagName('html')[0];
+    html.classList.toggle('theme-dark');
     html.classList.toggle('theme-light');
     document.getElementById('moon').style.display = "none";
     document.getElementById('sun').style.display = "block";
@@ -7,6 +8,7 @@ function ToggleThemeD(){
 function ToggleThemeL(){
     let html = document.getElementsByTagName('html')[0];
     html.classList.toggle('theme-dark');
-    document.getElementById('mooe').style.display = "block";
+    html.classList.toggle('theme-light');
+    document.getElementById('moon').style.display = "block";
     document.getElementById('sun').style.display = "none";
 }
