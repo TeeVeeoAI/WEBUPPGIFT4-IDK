@@ -1,20 +1,70 @@
 #moon{
     display: none;
 }
+#sun{
+    display: block;
+}
+
+body{
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
 
 .grid{
     display: grid;
-    grid-template-columns: 1% 1fr 3fr 1fr 1%;
+    grid-template-columns: 1% 1fr 1fr 1fr 1%;
     grid-template-rows: 1fr 0.6fr 3fr 1fr;
 
     grid-template-areas: 
-    ". theme header settings ."
+    ". head head head ."
     ". nav nav nav ."
-    ". content1 content2 content3 ."
-    ". readme1 readme2 readme3 .";
+    ". content content content ."
+    ". readme readme readme .";
 }
 
-.fa-moon, .fa-sun{
+header{
+    grid-area: head;
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-rows: 1fr;
+
+    grid-template-areas: 
+    "theme header settings";
+}
+
+.theme{
     grid-area: theme;
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header{
+    grid-area: header;
+}
+
+.settings{
+    grid-area: settings;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar{
+    grid-area: nav;
+}
+
+.content{
+    grid-area: content;
+}
+
+.readme{
+    grid-area: readme;
 }
