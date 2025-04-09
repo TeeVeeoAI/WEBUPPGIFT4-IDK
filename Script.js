@@ -12,3 +12,10 @@ function ToggleThemeL(){
     document.getElementById('moon').style.display = "block";
     document.getElementById('sun').style.display = "none";
 }
+
+function OpenNav(){
+    if (document.getElementById('dropdown').style.display == "none")
+        document.getElementById('dropdown').style.display = "block"
+    else
+        document.getElementById('dropdown').style.display = "none"
+}
