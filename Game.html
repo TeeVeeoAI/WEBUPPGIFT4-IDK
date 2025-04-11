@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="node_modules/bulma/css/bulma.min.css">
+    <link rel="stylesheet" href="node_modules/bulma-extensions/bulma-checkradio/dist/css/bulma-checkradio.min.css">
+    <script src="node_modules/bulma-toast/dist/bulma-toast.min.js"></script>
+    <script src="https://kit.fontawesome.com/5fa0058b85.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="Style.css">
+    <script src="Script.js"></script>
+</head>
+<body>
+    <div class="title" id="bigScreen">Your screen is to big pls connect on a smaller screen</div>
+    <div class="grid">
+        <header>
+            <div class="theme">
+                <i class="fa-solid fa-moon fa-2xl" id="moon" onclick="ToggleThemeD()"></i>
+                <i class="fa-solid fa-sun fa-2xl" id="sun" onclick="ToggleThemeL()"></i>
+            </div>
+
+            <h1 class="header">
+
+            </h1>
+
+            <div class="settings">
+                <i class="fa-solid fa-gear fa-2xl"></i>
+            </div>
+
+
+        </header>
+
+        <nav class="navbar">
+            <div id="navbar">
+                <a href="Home.html" class="button is-dark whereYouAre">Game</a>
+                <button class="button" id="more" onclick="OpenNav()">More<i class="fa-solid fa-caret-down fa-xl"></i></button>
+            </div>
+
+            <div id="dropdown">
+                <div>
+                    <div><a class="title is-6" href="Home.html">Home</a></div>
+                    <div><a class="title is-6" href="Game.html">Game</a></div>
+                    <div><a class="title is-6" href="Form.html">Form</a></div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="content">
+            <div class="content1"></div>
+            <div class="content2"></div>
+            <div class="content3"></div>
+        </div>
+
+        <div class="readme">
+            <div class="readme1"></div>
+            <div class="readme2"></div>
+            <div class="readme3"></div>
+        </div>
+
+    </div>
+</body>
+</html>

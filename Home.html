@@ -12,6 +12,7 @@
     <script src="Script.js"></script>
 </head>
 <body>
+    <div class="title" id="bigScreen">Your screen is to big pls connect on a smaller screen</div>
     <div class="grid">
         <header>
             <div class="theme">
@@ -32,8 +33,8 @@
 
         <nav class="navbar">
             <div id="navbar">
-                <a href="Home.html" class="button whereYouAre">Home</a>
-                <button class="button" onclick="OpenNav()">More<i class="fa-solid fa-caret-down fa-xl"></i></button>
+                <a href="Home.html" class="button is-dark whereYouAre">Home</a>
+                <button class="button" id="more" onclick="OpenNav()">More<i class="fa-solid fa-caret-down fa-xl"></i></button>
             </div>
 
             <div id="dropdown">
@@ -45,16 +46,32 @@
             </div>
         </nav>
 
-        <div class="content">
-            <div class="content1"></div>
-            <div class="content2"></div>
-            <div class="content3"></div>
+        <div class="content" id="content">
+            <div class="news">news</div>
+            <div class="content1">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consectetur quis consequatur unde aliquam laudantium veritatis expedita, soluta tempore sed fuga praesentium id optio obcaecati provident ratione? Et nobis voluptates necessitatibus! Ducimus illo est deleniti excepturi laudantium quidem molestias aperiam adipisci debitis nesciunt commodi quo quisquam, quas corporis qui tempore vel earum nihil ipsam repudiandae possimus optio doloremque ut incidunt. Aliquid aperiam quo atque nemo, velit odio ut voluptatem enim ea nisi animi impedit natus debitis voluptatibus repellendus ad vel perferendis excepturi veritatis quis. Beatae esse laborum excepturi dolore odit magni vel dolorem omnis eaque incidunt, recusandae ipsa est accusamus. Nulla.
+                <div class="readmore" onclick="Readmore(0)">Readmore<i class="fa-solid fa-chevron-down"></i></div>
+            </div>
+            <div class="content2">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, commodi!
+                <div class="readmore" onclick="Readmore(1)">Readmore<i class="fa-solid fa-chevron-down"></i></div>
+            </div>
+            <div class="content3">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic similique atque possimus quasi quisquam corporis fuga consectetur qui, error amet mollitia et. Ut voluptas ratione incidunt qui autem saepe sed commodi eligendi tenetur dolor, expedita nulla molestiae nisi error. Ex, sit tempora necessitatibus consequatur mollitia eum deleniti. Maxime, numquam deleniti!
+                <div class="readmore" onclick="Readmore(2)">Readmore<i class="fa-solid fa-chevron-down"></i></div>
+            </div>
         </div>
 
         <div class="readme">
-            <div class="readme1"></div>
-            <div class="readme2"></div>
-            <div class="readme3"></div>
+            <div class="readmes">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore asperiores modi ad est nihil officia molestias animi tempore praesentium esse adipisci dolor, expedita nam, dolorum ab necessitatibus sed dignissimos eius quidem quisquam dolorem reprehenderit repellat recusandae exercitationem? Culpa, veritatis corporis facere eius hic porro ducimus, iusto nemo nulla temporibus ut veniam illo deleniti! Inventore et accusantium ratione quod distinctio aliquid eaque modi! Aspernatur cupiditate odit sapiente quod quaerat facilis eum ab inventore debitis perferendis magni nesciunt, quas laboriosam amet doloremque voluptates dolorem doloribus quia, magnam dolorum? Libero optio excepturi iusto, ipsum illum sunt. Nobis quaerat modi animi, perferendis odio impedit quis placeat debitis autem saepe consequatur numquam a assumenda maxime deleniti molestias similique enim ut fugit. Debitis recusandae molestias ducimus distinctio illum nesciunt cumque expedita maiores voluptatibus molestiae! Reprehenderit odit in exercitationem saepe, dolor aut quos, aliquam numquam laboriosam quibusdam obcaecati voluptatum esse accusantium incidunt possimus accusamus explicabo error ullam.
+            </div>
+            <div class="readmes">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio fugit minima et, rem ducimus tempore facilis, quibusdam libero unde ullam consequuntur distinctio quas sequi voluptatem exercitationem sed fugiat dolore repudiandae qui sit adipisci nulla reprehenderit? Saepe reiciendis consequatur eaque vitae facere, corrupti deleniti dolorum nulla sunt sit tempore dolore porro et ex natus officia illo nemo provident tempora exercitationem odit! Suscipit voluptates modi ratione animi fugiat magni est ullam debitis? Earum quae consequatur laborum possimus blanditiis itaque in quod enim sed facilis accusamus ab, omnis odio iure ex ipsum culpa odit iste totam. Amet animi perspiciatis temporibus quisquam provident nulla facere rerum earum veritatis nam nobis, qui ipsam vel, esse modi iusto velit dolorem unde repudiandae autem illo omnis impedit eius! Voluptatum nisi dolore quidem modi blanditiis debitis quod deserunt, sapiente molestiae rerum iure minima ipsam commodi nesciunt et ab. Sint repellat aut eos dicta sit perferendis repudiandae a maiores facilis. Beatae molestias rerum voluptatibus, veritatis accusamus repellat, aut similique distinctio incidunt harum explicabo corrupti! Modi quia architecto quis neque veritatis, molestias suscipit sapiente ab assumenda omnis odit eligendi voluptatum aliquam. Nesciunt, itaque? Debitis tempora accusamus, ab harum dolore nesciunt. Labore asperiores quo esse, delectus quod architecto voluptatum quis voluptatibus!
+            </div>
+            <div class="readmes">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, esse officia maxime quas fuga dicta inventore voluptatum magni vero dolor quae itaque nam dignissimos quisquam ad aperiam tenetur eveniet, blanditiis ducimus veniam laboriosam temporibus accusamus. In, officia omnis totam, odit corrupti reprehenderit quidem delectus iste, impedit molestias quod voluptatum tempora ipsam qui nam voluptate iusto distinctio fugiat tenetur nulla eius commodi perferendis esse. Expedita consectetur porro explicabo debitis sapiente repellendus culpa. In voluptatum placeat vero dicta dignissimos nam? Sequi repellendus ad voluptatibus doloremque repellat, earum incidunt reiciendis ab nihil cumque fugiat maiores deleniti eius magni expedita omnis, autem laudantium eum vel culpa voluptatem distinctio saepe? Voluptates aperiam, esse nobis nostrum doloremque consequatur numquam corrupti quam ut ducimus totam reiciendis rerum. A et recusandae, minima mollitia praesentium, facere tenetur cum optio voluptate saepe atque iure totam ea eligendi veniam necessitatibus voluptatem quam provident reiciendis, culpa doloribus. Deserunt laboriosam eaque impedit ratione cupiditate nostrum eum et ut nisi sapiente autem tempora laudantium ipsum natus molestias, hic, earum eveniet! Fugiat numquam dolor ab placeat amet veniam, nisi, sapiente laborum dolorem eius blanditiis! Totam quod, nemo, quia ratione aliquam architecto excepturi debitis molestiae soluta autem doloremque atque ad necessitatibus nostrum enim aliquid numquam cupiditate at tenetur odit earum exercitationem? Expedita incidunt fugit, sint illo ipsum non, exercitationem, atque ipsa culpa maxime placeat iusto aliquam? Atque iste laudantium sapiente id vitae a autem impedit possimus cum eligendi, praesentium aliquid? Velit, aut, modi tempora omnis iure quam a sapiente, nulla eos doloremque ut soluta amet quas.
+            </div>
         </div>
 
     </div>

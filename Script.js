@@ -1,3 +1,5 @@
+const readme = document.getElementsByClassName('readmes');
+
 function ToggleThemeD(){
     let html = document.getElementsByTagName('html')[0];
     html.classList.toggle('theme-dark');
@@ -14,8 +16,20 @@ function ToggleThemeL(){
 }
 
 function OpenNav(){
-    if (document.getElementById('dropdown').style.display == "none")
-        document.getElementById('dropdown').style.display = "block"
-    else
-        document.getElementById('dropdown').style.display = "none"
+    if (document.getElementById('dropdown').style.display == "none"){
+        document.getElementById('dropdown').style.display = "block";
+        document.getElementById('content').style.marginTop = "100px";
+    }
+    else{
+        document.getElementById('dropdown').style.display = "none";
+        document.getElementById('content').style.marginTop = "0";
+    }
+}
+
+function Readmore(index){
+    for (let i = 0; i < 3; i++){
+        readme[i].style.display = "none";
+    }
+    readme[index].style.display = "block"; 
+
 }

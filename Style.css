@@ -1,5 +1,6 @@
 :root{
     --main_color: #454;
+    --main_color_a: #44554410;
     --border-color: #333;
 }
 
@@ -20,12 +21,21 @@ body{
 *{
     margin: 0;
     padding: 0;
+    font-family: 'Crimson Text';
+}
+
+#bigScreen{
+    display: none;
+}
+
+.readme *{
+    display: none;
 }
 
 .grid{
     display: grid;
     grid-template-columns: 1% 1fr 1fr 1fr 1%;
-    grid-template-rows: 50px 40px 3fr 1fr;
+    grid-template-rows: 50px 40px 0.5fr 1fr;
 
     grid-template-areas: 
     ". head head head ."
@@ -72,7 +82,7 @@ header{
         position: relative;
         left: 85px;
         border: var(--border-color) solid 1px;
-        width: 80px;
+        width: 85px;
         padding: 5px;
         div{
             list-style: disc;
@@ -83,16 +93,71 @@ header{
             text-align: center;
         }
     }
+    #more i{
+        margin-left: 5px;
+    }
 }
 
 .content{
     grid-area: content;
+    display: grid;
+    grid-template-columns: 2.5fr 1.5fr 2fr;
+    grid-template-rows: 50px 1fr;
+
+    grid-template-areas: 
+    "news news news"
+    "content1 content2 content3";
+
+    .content1, .content2, .content3, .news{
+        margin: 10px;
+        font-size: 0.8em;
+    }
+
+    .content1{
+        grid-area: content1;
+    }
+    .content2{
+        grid-area: content2;
+    }
+    .content3{
+        grid-area: content3;
+    }
+    .news{
+        grid-area: news;
+    }
+    .readmore{
+        padding-top: 10px;
+        padding-bottom: 10px;
+        text-align: center;
+        border-radius: 50px;
+        border: solid var(--border-color) 1px;
+        background-image: radial-gradient(var(--main_color_a), var(--main_color_a), var(--main_color), var(--main_color_a), var(--main_color_a));
+    }
 }
 
 .readme{
     grid-area: readme;
+    *{
+        margin: 10px;
+    }
 }
 
 .button{
     border-color: var(--border-color)
+}
+
+@media (min-width: 600px){
+    body *{
+        display: none;
+    }
+    body{
+        display: flex;
+        justify-content: center;
+        margin: 10px;
+        margin-top: 100px;
+    }
+    #bigScreen{
+        display: block;
+        color: #ef0602;
+    }
 }
