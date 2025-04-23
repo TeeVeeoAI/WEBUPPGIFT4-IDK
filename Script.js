@@ -27,9 +27,15 @@ function OpenNav(){
 }
 
 function Readmore(index){
+    let notOpen = true;
+    if(document.getElementsByClassName('readmes')[index].style.display == "block"){
+        notOpen = false;
+    }
     for (let i = 0; i < 3; i++){
         readme[i].style.display = "none";
     }
-    readme[index].style.display = "block"; 
+    if(notOpen){
+        readme[index].style.display = "block"; 
+    }
 
 }
