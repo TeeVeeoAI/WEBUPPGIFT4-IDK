@@ -37,5 +37,24 @@ function Readmore(index){
     if(notOpen){
         readme[index].style.display = "block"; 
     }
-
 }
+
+//Game
+let c;
+let ctx;
+let w = 10;
+
+function test(){
+    c = document.getElementById('Game');
+    ctx = c.getContext('2d');
+    ctx.fillStyle = "red";
+    ctx.fillRect(w, 0, 20, 20);
+    w++;
+}
+
+function test2(){
+    ctx.clearRect(w-1, 0, 20, 20)
+}
+
+setInterval(test, 500)
+setInterval(test2, 500)
