@@ -47,9 +47,14 @@
         </nav>
 
         <div class="content" onclick="test()">
-            <canvas id="Game" width="100%" height="100%">
-                
+            <canvas id="Game" width="200px" height="200px">
+
             </canvas>
+            <div id="winLose">
+                <p id="top" class="title">Win or Lose</p>
+                <p id="score">Your score: </p>
+                <button id="restart" onclick="Restart()" class="button">Restart</button>
+            </div>
         </div>
 
         <div class="readme">

@@ -177,3 +177,17 @@ header{
     width: 100%;
     aspect-ratio: 1;
 }
+#winLose{
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    z-index: 100;
+    background: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    *{
+        color: #dc143c
+    }
+}

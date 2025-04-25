@@ -42,19 +42,72 @@ function Readmore(index){
 //Game
 let c;
 let ctx;
-let w = 10;
+let vol = [0, 0];
+let pos = [0, 0];
 
 function test(){
     c = document.getElementById('Game');
     ctx = c.getContext('2d');
     ctx.fillStyle = "red";
-    ctx.fillRect(w, 0, 20, 20);
-    w++;
+    
+    ctx.clearRect(pos[0], pos[1], 20, 20);
+
+
+    pos[1] += vol[1];
+    pos[0] += vol[0];
+    if (pos[0] < 0){
+        pos[0] = 0;
+        vol[0] = 0;
+        alert("lose")
+    } else if (pos[0] > 190){
+        pos[0] = 190;
+        vol[0] = 0;
+        alert("lose")
+    }
+    if (pos[1] < 0){
+        pos[1] = 0;
+        vol[1] = 0;
+        alert("lose")
+    } else if (pos[1] > 190){
+        pos[1] = 190;
+        vol[1] = 0;
+        
+    }
+    ctx.fillRect(pos[0],pos[1], 10, 10);
 }
 
-function test2(){
-    ctx.clearRect(w-1, 0, 20, 20)
+setInterval(test, 200);
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-setInterval(test, 500)
-setInterval(test2, 500)
+document.addEventListener('keydown', function(event) {
+    switch (event.key) {
+        case "w":
+            vol[0] = 0;
+            vol[1] = -10;
+            console.log("w")
+            break;
+        case "s":
+            vol[0] = 0;
+            vol[1] = 10;
+            console.log("s")
+            break;
+        case "a":
+            vol[0] = -10;
+            vol[1] = 0;
+            console.log("a")
+            break;
+        case "d":
+            vol[0] = 10;
+            vol[1] = 0;
+            console.log("d")
+            break;
+    
+        default:
+            vol[0] = 0;
+            vol[1] = 0;
+            break;
+    }
+});
