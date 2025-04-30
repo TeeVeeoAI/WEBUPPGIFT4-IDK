@@ -43,40 +43,53 @@ function Readmore(index){
 let c;
 let ctx;
 let vol = [0, 0];
-let pos = [0, 0];
+let pos = [90, 90];
+let score = 0;
+let win = false;
+let lose = false;
+let start = true;
+let length = 2;
+let maxL = 10;
+let prevPos = [ [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10] ];
 
-function test(){
+function Snake(){
     c = document.getElementById('Game');
     ctx = c.getContext('2d');
     ctx.fillStyle = "red";
     
     ctx.clearRect(pos[0], pos[1], 20, 20);
 
-
+    MovePos();
     pos[1] += vol[1];
     pos[0] += vol[0];
     if (pos[0] < 0){
         pos[0] = 0;
         vol[0] = 0;
-        alert("lose")
+        lose = true;
     } else if (pos[0] > 190){
         pos[0] = 190;
         vol[0] = 0;
-        alert("lose")
+        lose = true;
     }
     if (pos[1] < 0){
         pos[1] = 0;
         vol[1] = 0;
-        alert("lose")
+        lose = true;
     } else if (pos[1] > 190){
         pos[1] = 190;
         vol[1] = 0;
-        
+        lose = true;
     }
-    ctx.fillRect(pos[0],pos[1], 10, 10);
+    ctx.fillRect(pos[0], pos[1], 10, 10);
+    for(let i = 0; i < length; i++){
+        ctx.fillRect(prevPos[i][0], prevPos[i][1], 10, 10);
+        //console.log("length = " + length + "; \nprevPos["+i+"] \nY = " + prevPos[i][1] + "; \nX = " + prevPos[i][0])
+    }
 }
 
-setInterval(test, 200);
+setInterval(Snake, 200);
+setInterval(Score, 1000);
+setInterval(WinLose, 200);
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -111,3 +124,59 @@ document.addEventListener('keydown', function(event) {
             break;
     }
 });
+
+function Score(){
+    document.getElementById('score').innerHTML = score;
+    if (score > 100 && score < 200){
+        document.getElementById('score').style.color = "#dc143c"
+    }
+    if (score > 200){
+        document.getElementById('score').style.color = "#00ff00"
+    }
+}
+
+function WinLose(){
+    if (win){
+        document.getElementById('top').innerHTML = "Win";
+        document.getElementById('winLose').style.display = "flex";
+    }
+    if (lose){
+        document.getElementById('top').innerHTML = "Lose";
+        document.getElementById('winLose').style.display = "flex";
+    }
+}
+
+function Restart(){
+    c = document.getElementById('Game');
+    ctx = c.getContext('2d');
+    
+    ctx.clearRect(pos[0], pos[1], 20, 20);
+
+    vol = [0, 0];
+    pos = [90, 90];
+    score = 0;
+    win = false;
+    lose = false;
+    start = true;
+    length = 1;
+    document.getElementById('winLose').style.display = "none";
+}
+
+function Food(){
+    c = document.getElementById('Game');
+    ctx = c.getContext('2d');
+    ctx.fillStyle = "green";
+
+    let y = Math.floor(Math.random() * 20)*10;
+    let x = Math.floor(Math.random() * 20)*10;
+    console.log("y = " + y + "; x = " + x);
+
+    ctx.fillRect(x, y, 10, 10);
+}
+
+function MovePos(){
+    prevPos[0] = pos;
+    for(let i = 0; i < maxL-1; i++){
+        prevPos[i+1] = prevPos[i]
+    }
+}
