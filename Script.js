@@ -39,7 +39,8 @@ function Readmore(index){
     }
 }
 
-//Game
+//Game¨
+
 let c;
 let ctx;
 let vol = [0, 0];
@@ -48,10 +49,12 @@ let score = 0;
 let win = false;
 let lose = false;
 let start = true;
-let length = 2;
+let length = 1;
 let maxL = 10;
 let prevPos = [ [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10] ];
-let foodPos = [];
+let foodPos = [[-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10]];
+let maxFood = 5;
+let curFood = 0;
 
 function Snake(){
     c = document.getElementById('Game');
@@ -59,12 +62,26 @@ function Snake(){
     ctx.fillStyle = "red";
     
     ctx.clearRect(pos[0], pos[1], 10, 10);
-    
-    if (pos == foodPos){
-        foodPos = [];
-        length++;
-        score += 100;
+
+    for (let i = 0; i < maxFood; i++){
+        if (pos[0] == foodPos[i][0] && pos[1] == foodPos[i][1]){
+
+            for (let j = i; j < maxFood-1; j++){
+                foodPos[j] = foodPos[j+1];
+            }
+            foodPos[maxFood-1] = [-10, -10]
+            curFood--;
+
+            length++;
+            score += 100;
+            Food();
+        }
     }
+
+    if (length >= maxL){
+        win = true;
+    }
+    
 
     MovePos();
     pos[1] += vol[1];
@@ -94,6 +111,10 @@ function Snake(){
     }
 }
 
+for(let i = 0; i < 5; i++){
+    Food();
+}
+
 setInterval(Snake, 100);
 setInterval(Score, 1000);
 setInterval(WinLose, 200);
@@ -102,39 +123,51 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-document.addEventListener('keydown', function(event) {
-    switch (event.key) {
-        case "w":
-            vol[0] = 0;
-            vol[1] = vol[1] == 10 ? 10 : -10;
-            console.log("w")
-            break;
-        case "s":
-            vol[0] = 0;
-            vol[1] = vol[1] == -10 ? -10 : 10;
-            console.log("s")
-            break;
-        case "a":
-            vol[0] = vol[0] == 10 ? 10 : -10;
-            vol[1] = 0;
-            console.log("a")
-            break;
-        case "d":
-            vol[0] = vol[0] == -10 ? -10 : 10;
-            vol[1] = 0;
-            console.log("d")
-            break;
-        case "e":
-            Food();
-            console.log("e")
-    
-        default:
-            vol[0] = 0;
-            vol[1] = 0;
-            console.log(event.key)
-            break;
-    }
-});
+if (!win || !lose){
+    document.addEventListener('keydown', function(event) {
+        switch (event.key) {
+            case "w":
+                vol[0] = 0;
+                vol[1] = vol[1] == 10 ? 10 : -10;
+                console.log("w")
+                break;
+            case "s":
+                vol[0] = 0;
+                vol[1] = vol[1] == -10 ? -10 : 10;
+                console.log("s")
+                break;
+            case "a":
+                vol[0] = vol[0] == 10 ? 10 : -10;
+                vol[1] = 0;
+                console.log("a")
+                break;
+            case "d":
+                vol[0] = vol[0] == -10 ? -10 : 10;
+                vol[1] = 0;
+                console.log("d")
+                break;
+            case "e":
+                Food();
+                console.log("e")
+                break;
+            case "p":
+                console.log("Length: " + length + "\nScore: " + score);
+                break;
+            case "f": 
+                console.log("foodpos: " + foodPos);
+                for (let i = 0; i < maxFood; i++){
+                    console.log("\nTestx: " + foodPos[i][0] + " | TestY: " + foodPos[i][1])
+                }
+                break;
+        
+            default:
+                vol[0] = 0;
+                vol[1] = 0;
+                console.log(event.key)
+                break;
+        }
+    });
+}
 
 function Score(){
     document.getElementById('score').innerHTML = score;
@@ -150,6 +183,8 @@ function WinLose(){
     if (win){
         document.getElementById('top').innerHTML = "Win";
         document.getElementById('winLose').style.display = "flex";
+        vol = [0, 0];
+        pos = [90, 90];
     }
     if (lose){
         document.getElementById('top').innerHTML = "Lose";
@@ -161,7 +196,7 @@ function Restart(){
     c = document.getElementById('Game');
     ctx = c.getContext('2d');
     
-    ctx.clearRect(pos[0], pos[1], 20, 20);
+    ctx.clearRect(0, 0, 200, 200);
 
     vol = [0, 0];
     pos = [90, 90];
@@ -170,6 +205,10 @@ function Restart(){
     lose = false;
     start = true;
     length = 1;
+    maxL = 10;
+    prevPos = [ [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10] ];
+    foodPos = [ [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10] ];
+    curFood = 0;
     document.getElementById('winLose').style.display = "none";
 }
 
@@ -178,12 +217,15 @@ function Food(){
     ctx = c.getContext('2d');
     ctx.fillStyle = "green";
 
-    let y = Math.floor(Math.random() * 20)*10;
-    let x = Math.floor(Math.random() * 20)*10;
-    foodPos = [y, x];
-    console.log("y = " + y + "; x = " + x);
-
-    ctx.fillRect(x, y, 10, 10);
+    if (curFood < maxFood){
+        let y = Math.floor(Math.random() * 20)*10;
+        let x = Math.floor(Math.random() * 20)*10;
+        console.log("y = " + y + "; x = " + x);
+    
+        ctx.fillRect(x, y, 10, 10);
+        foodPos[curFood] = [x,y];
+        curFood++;
+    }
 }
 
 function MovePos(){
