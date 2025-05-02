@@ -51,13 +51,20 @@ let start = true;
 let length = 2;
 let maxL = 10;
 let prevPos = [ [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10] ];
+let foodPos = [];
 
 function Snake(){
     c = document.getElementById('Game');
     ctx = c.getContext('2d');
     ctx.fillStyle = "red";
     
-    ctx.clearRect(pos[0], pos[1], 20, 20);
+    ctx.clearRect(pos[0], pos[1], 10, 10);
+    
+    if (pos == foodPos){
+        foodPos = [];
+        length++;
+        score += 100;
+    }
 
     MovePos();
     pos[1] += vol[1];
@@ -87,7 +94,7 @@ function Snake(){
     }
 }
 
-setInterval(Snake, 200);
+setInterval(Snake, 100);
 setInterval(Score, 1000);
 setInterval(WinLose, 200);
 
@@ -99,28 +106,32 @@ document.addEventListener('keydown', function(event) {
     switch (event.key) {
         case "w":
             vol[0] = 0;
-            vol[1] = -10;
+            vol[1] = vol[1] == 10 ? 10 : -10;
             console.log("w")
             break;
         case "s":
             vol[0] = 0;
-            vol[1] = 10;
+            vol[1] = vol[1] == -10 ? -10 : 10;
             console.log("s")
             break;
         case "a":
-            vol[0] = -10;
+            vol[0] = vol[0] == 10 ? 10 : -10;
             vol[1] = 0;
             console.log("a")
             break;
         case "d":
-            vol[0] = 10;
+            vol[0] = vol[0] == -10 ? -10 : 10;
             vol[1] = 0;
             console.log("d")
             break;
+        case "e":
+            Food();
+            console.log("e")
     
         default:
             vol[0] = 0;
             vol[1] = 0;
+            console.log(event.key)
             break;
     }
 });
@@ -169,6 +180,7 @@ function Food(){
 
     let y = Math.floor(Math.random() * 20)*10;
     let x = Math.floor(Math.random() * 20)*10;
+    foodPos = [y, x];
     console.log("y = " + y + "; x = " + x);
 
     ctx.fillRect(x, y, 10, 10);
