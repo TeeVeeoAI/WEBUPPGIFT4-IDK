@@ -51,17 +51,28 @@ let lose = false;
 let start = true;
 let length = 1;
 let maxL = 10;
-let prevPos = [ [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10] ];
+let prevPos =   [ 
+                    [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10]
+                ];
 let foodPos = [[-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10]];
 let maxFood = 5;
 let curFood = 0;
+let r = 0;
 
 function Snake(){
     c = document.getElementById('Game');
     ctx = c.getContext('2d');
     ctx.fillStyle = "red";
+
+    if (vol[0] > 0 || vol[1] > 0 || vol[0] < 0 || vol[1] < 0){
+        if (length <= 1){
+            ctx.clearRect(pos[0], pos[1], 10, 10);
+        } else {
+            ctx.clearRect(prevPos[length-2][0], prevPos[length-2][1], 10, 10)
+        }
+    }
+
     
-    ctx.clearRect(pos[0], pos[1], 10, 10);
 
     for (let i = 0; i < maxFood; i++){
         if (pos[0] == foodPos[i][0] && pos[1] == foodPos[i][1]){
@@ -82,10 +93,13 @@ function Snake(){
         win = true;
     }
     
+    if (vol[0] > 0 || vol[1] > 0 || vol[0] < 0 || vol[1] < 0){
+        MovePos();
+    }
 
-    MovePos();
     pos[1] += vol[1];
     pos[0] += vol[0];
+    console.log(pos[0] + " " + pos[1] + "\n" + prevPos[1][0] + " " + prevPos[1][1] + "\n" + prevPos[1][0] + " " + prevPos[1][1] + "\n" + prevPos[2][0] + " " + prevPos[2][1])
     if (pos[0] < 0){
         pos[0] = 0;
         vol[0] = 0;
@@ -105,14 +119,6 @@ function Snake(){
         lose = true;
     }
     ctx.fillRect(pos[0], pos[1], 10, 10);
-    for(let i = 0; i < length; i++){
-        ctx.fillRect(prevPos[i][0], prevPos[i][1], 10, 10);
-        //console.log("length = " + length + "; \nprevPos["+i+"] \nY = " + prevPos[i][1] + "; \nX = " + prevPos[i][0])
-    }
-}
-
-for(let i = 0; i < 5; i++){
-    Food();
 }
 
 setInterval(Snake, 100);
@@ -229,8 +235,10 @@ function Food(){
 }
 
 function MovePos(){
-    prevPos[0] = pos;
-    for(let i = 0; i < maxL-1; i++){
-        prevPos[i+1] = prevPos[i]
+    for (let i = maxL-2; i > 0; i--){
+        prevPos[i][0] = prevPos[i-1][0];
+        prevPos[i][1] = prevPos[i-1][1];
     }
+    prevPos[0][0] = pos[0];
+    prevPos[0][1] = pos[1];
 }
