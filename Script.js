@@ -39,6 +39,16 @@ function Readmore(index){
     }
 }
 
+function Terms(){
+    let terms = document.getElementById('terms');
+    let submit = document.getElementById('submit');
+    if (terms.checked){
+        submit.disabled = false;
+    } else if (!terms.checked){
+        submit.disabled = true;
+    }
+}
+
 //Game¨
 
 let c;
@@ -50,18 +60,28 @@ let win = false;
 let lose = false;
 let start = true;
 let length = 1;
-let maxL = 10;
+let maxL = 30;
 let prevPos =   [ 
+                    [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10],
+                    [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10, -10],
                     [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10]
                 ];
-let foodPos = [[-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10]];
+let foodPos = [ [Math.floor(Math.random() * 20)*10,Math.floor(Math.random() * 20)*10], 
+                [Math.floor(Math.random() * 20)*10,Math.floor(Math.random() * 20)*10], 
+                [Math.floor(Math.random() * 20)*10,Math.floor(Math.random() * 20)*10], 
+                [Math.floor(Math.random() * 20)*10,Math.floor(Math.random() * 20)*10], 
+                [Math.floor(Math.random() * 20)*10,Math.floor(Math.random() * 20)*10]];
 let maxFood = 5;
-let curFood = 0;
+let curFood = 5;
 let r = 0;
 
 function Snake(){
     c = document.getElementById('Game');
     ctx = c.getContext('2d');
+    
+    for (let i = 0; i < maxFood; i++){
+        DrawFood(foodPos[i][0], foodPos[i][1]);
+    }
     ctx.fillStyle = "red";
 
     if (vol[0] > 0 || vol[1] > 0 || vol[0] < 0 || vol[1] < 0){
@@ -99,7 +119,7 @@ function Snake(){
 
     pos[1] += vol[1];
     pos[0] += vol[0];
-    console.log(pos[0] + " " + pos[1] + "\n" + prevPos[1][0] + " " + prevPos[1][1] + "\n" + prevPos[1][0] + " " + prevPos[1][1] + "\n" + prevPos[2][0] + " " + prevPos[2][1])
+    //console.log(pos[0] + " " + pos[1] + "\n" + prevPos[1][0] + " " + prevPos[1][1] + "\n" + prevPos[1][0] + " " + prevPos[1][1] + "\n" + prevPos[10][0] + " " + prevPos[19][1])
     if (pos[0] < 0){
         pos[0] = 0;
         vol[0] = 0;
@@ -118,16 +138,21 @@ function Snake(){
         vol[1] = 0;
         lose = true;
     }
+    
+    for (let i = 0; i < length; i++){
+        if (pos[0] == prevPos[i][0] && pos[1] == prevPos[i][1]){
+            lose = true;
+            vol[1] = 0;
+            vol[0] = 0;
+        }
+    }
+
     ctx.fillRect(pos[0], pos[1], 10, 10);
 }
 
 setInterval(Snake, 100);
 setInterval(Score, 1000);
 setInterval(WinLose, 200);
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
 
 if (!win || !lose){
     document.addEventListener('keydown', function(event) {
@@ -177,11 +202,14 @@ if (!win || !lose){
 
 function Score(){
     document.getElementById('score').innerHTML = score;
-    if (score > 100 && score < 200){
+    if (score >= 100 && score < 1000){
         document.getElementById('score').style.color = "#dc143c"
     }
-    if (score > 200){
+    if (score >= 1000 && score < 2000){
         document.getElementById('score').style.color = "#00ff00"
+    }
+    if (score >= 2000){
+        document.getElementById('score').style.color = "#245617"
     }
 }
 
@@ -211,24 +239,22 @@ function Restart(){
     lose = false;
     start = true;
     length = 1;
-    maxL = 10;
     prevPos = [ [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10] ];
-    foodPos = [ [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10] ];
-    curFood = 0;
+    foodPos = [ [Math.floor(Math.random() * 20)*10,Math.floor(Math.random() * 20)*10], 
+                [Math.floor(Math.random() * 20)*10,Math.floor(Math.random() * 20)*10], 
+                [Math.floor(Math.random() * 20)*10,Math.floor(Math.random() * 20)*10], 
+                [Math.floor(Math.random() * 20)*10,Math.floor(Math.random() * 20)*10], 
+                [Math.floor(Math.random() * 20)*10,Math.floor(Math.random() * 20)*10]];
+    curFood = 5;
     document.getElementById('winLose').style.display = "none";
 }
 
 function Food(){
-    c = document.getElementById('Game');
-    ctx = c.getContext('2d');
-    ctx.fillStyle = "green";
-
     if (curFood < maxFood){
         let y = Math.floor(Math.random() * 20)*10;
         let x = Math.floor(Math.random() * 20)*10;
         console.log("y = " + y + "; x = " + x);
     
-        ctx.fillRect(x, y, 10, 10);
         foodPos[curFood] = [x,y];
         curFood++;
     }
@@ -242,3 +268,12 @@ function MovePos(){
     prevPos[0][0] = pos[0];
     prevPos[0][1] = pos[1];
 }
+
+function DrawFood(x, y){
+    c = document.getElementById('Game');
+    ctx = c.getContext('2d');
+    ctx.fillStyle = "green";
+
+    ctx.fillRect(x, y, 10, 10);
+}
+

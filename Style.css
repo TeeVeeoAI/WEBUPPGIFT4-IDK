@@ -166,7 +166,7 @@ header{
     }
 }
 
-.content:has(#Game){
+.content:has(#Game, #Form){
     display: flex;
     justify-content: center;
     align-items: center;
