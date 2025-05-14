@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Game</title>
     <link rel="stylesheet" href="node_modules/bulma/css/bulma.min.css">
     <link rel="stylesheet" href="node_modules/bulma-extensions/bulma-checkradio/dist/css/bulma-checkradio.min.css">
     <script src="node_modules/bulma-toast/dist/bulma-toast.min.js"></script>
     <script src="https://kit.fontawesome.com/5fa0058b85.js" crossorigin="anonymous"></script>
+    <script src="Game.js"></script>
     <link rel="stylesheet" href="Style.css">
     <script src="Script.js"></script>
 </head>
@@ -33,7 +34,7 @@
 
         <nav class="navbar">
             <div id="navbar">
-                <a href="Home.html" class="button is-dark whereYouAre">Game</a>
+                <a href="Game.html" class="button is-dark whereYouAre">Game</a>
                 <button class="button" id="more" onclick="OpenNav()">More<i class="fa-solid fa-caret-down fa-xl"></i></button>
             </div>
 
@@ -46,7 +47,7 @@
             </div>
         </nav>
 
-        <div class="content">
+        <div class="content" id="content">
             <canvas id="Game" width="200px" height="200px">
 
             </canvas>

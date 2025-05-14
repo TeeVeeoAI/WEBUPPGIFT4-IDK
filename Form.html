@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Form</title>
     <link rel="stylesheet" href="node_modules/bulma/css/bulma.min.css">
     <link rel="stylesheet" href="node_modules/bulma-extensions/bulma-checkradio/dist/css/bulma-checkradio.min.css">
     <script src="node_modules/bulma-toast/dist/bulma-toast.min.js"></script>
@@ -33,7 +33,7 @@
 
         <nav class="navbar">
             <div id="navbar">
-                <a href="Home.html" class="button is-dark whereYouAre">Form</a>
+                <a href="Form.html" class="button is-dark whereYouAre">Form</a>
                 <button class="button" id="more" onclick="OpenNav()">More<i class="fa-solid fa-caret-down fa-xl"></i></button>
             </div>
 
@@ -46,19 +46,19 @@
             </div>
         </nav>
 
-        <div class="content">
+        <div class="content" id="content">
             <form id="Form" action="https://formsubmit.co/tosi07001@utb.vaxjo.se" method="post">
                 <div class="field">
                     <label class="label">Name</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="Text input">
+                        <input class="input" type="text" placeholder="Name">
                     </div>
                 </div>
                 
                 <div class="field">
                     <label class="label">Email</label>
                     <div class="control has-icons-left has-icons-right">
-                        <input class="input" type="email" placeholder="Email input">
+                        <input class="input" type="email" placeholder="Email">
                         <span class="icon is-small is-left">
                             <i class="fas fa-envelope"></i>
                         </span>
@@ -68,7 +68,7 @@
                 <div class="field">
                     <label class="label">Message</label>
                     <div class="control">
-                        <textarea class="textarea" placeholder="Textarea"></textarea>
+                        <textarea class="textarea" placeholder="Message"></textarea>
                     </div>
                 </div>
                 
