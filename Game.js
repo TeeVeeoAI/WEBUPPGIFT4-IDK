@@ -7,7 +7,7 @@ let pos = [90, 90];
 let score = 0;
 let win = false;
 let lose = false;
-let start = true;
+let started = false;
 let length = 1;
 let maxL = 31;
 let prevPos =   [ 
@@ -28,24 +28,9 @@ function Snake(){
     c = document.getElementById('Game');
     ctx = c.getContext('2d');
     
-    for (let i = 0; i < maxFood; i++){
-        DrawFood(foodPos[i][0], foodPos[i][1]);
-    }
-    ctx.fillStyle = "red";
-
-    if (vol[0] > 0 || vol[1] > 0 || vol[0] < 0 || vol[1] < 0){
-        if (length <= 1){
-            ctx.clearRect(pos[0], pos[1], 10, 10);
-        } else {
-            ctx.clearRect(prevPos[length-2][0], prevPos[length-2][1], 10, 10)
-        }
-    }
-
     
-
     for (let i = 0; i < maxFood; i++){
         if (pos[0] == foodPos[i][0] && pos[1] == foodPos[i][1]){
-
             for (let j = i; j < maxFood-1; j++){
                 foodPos[j] = foodPos[j+1];
             }
@@ -55,6 +40,19 @@ function Snake(){
             length++;
             score += 100;
             Food();
+        }
+    }
+    
+    for (let i = 0; i < maxFood; i++){
+        DrawFood(foodPos[i][0], foodPos[i][1]);
+    }
+    ctx.fillStyle = "#ff1030";
+
+    if (vol[0] > 0 || vol[1] > 0 || vol[0] < 0 || vol[1] < 0){
+        if (length <= 1){
+            ctx.clearRect(pos[0], pos[1], 10, 10);
+        } else {
+            ctx.clearRect(prevPos[length-2][0], prevPos[length-2][1], 10, 10)
         }
     }
 
@@ -100,10 +98,10 @@ function Snake(){
 }
 
 setInterval(Snake, 100);
-setInterval(Score, 1000);
 setInterval(WinLose, 200);
+setInterval(Score, 100)
 
-if (!win || !lose){
+if ((!win || !lose) && started){
     document.addEventListener('keydown', function(event) {
         switch (event.key) {
             case "w":
@@ -134,9 +132,8 @@ if (!win || !lose){
                 console.log("Length: " + length + "\nScore: " + score);
                 break;
             case "f": 
-                console.log("foodpos: " + foodPos);
                 for (let i = 0; i < maxFood; i++){
-                    console.log("\nTestx: " + foodPos[i][0] + " | TestY: " + foodPos[i][1])
+                    console.log("\nX: " + foodPos[i][0] + " | Y: " + foodPos[i][1])
                 }
                 break;
         
@@ -151,26 +148,39 @@ if (!win || !lose){
 
 function Score(){
     document.getElementById('score').innerHTML = score;
-    if (score >= 100 && score < 1000){
+    document.getElementById('score2').innerHTML = score;
+    if (score < 1000){
         document.getElementById('score').style.color = "#dc143c"
+        document.getElementById('score2').style.color = "#dc143c"
     }
     if (score >= 1000 && score < 2000){
         document.getElementById('score').style.color = "#00ff00"
+        document.getElementById('score2').style.color = "#00ff00"
     }
     if (score >= 2000){
         document.getElementById('score').style.color = "#245617"
+        document.getElementById('score2').style.color = "#245617"
     }
 }
 
 function WinLose(){
     if (win){
         document.getElementById('top').innerHTML = "Win";
+        document.getElementById('score').style.display = "block";
         document.getElementById('winLose').style.display = "flex";
+        document.getElementById('restart').innerHTML = "Restart";
         vol = [0, 0];
         pos = [90, 90];
     }
     else if (lose){
         document.getElementById('top').innerHTML = "Lose";
+        document.getElementById('score').style.display = "block";
+        document.getElementById('winLose').style.display = "flex";
+        document.getElementById('restart').innerHTML = "Restart";
+    } 
+    else if(!started){
+        document.getElementById('top').innerHTML = "Not Started";
+        document.getElementById('score').style.display = "none";
         document.getElementById('winLose').style.display = "flex";
     }
 }
@@ -186,7 +196,7 @@ function Restart(){
     score = 0;
     win = false;
     lose = false;
-    start = true;
+    started = true;
     length = 1;
     prevPos =   [ 
         [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10],
@@ -225,7 +235,8 @@ function MovePos(){
 function DrawFood(x, y){
     c = document.getElementById('Game');
     ctx = c.getContext('2d');
-    ctx.fillStyle = "green";
+
+    ctx.fillStyle = "#fea"
 
     ctx.fillRect(x, y, 10, 10);
 }

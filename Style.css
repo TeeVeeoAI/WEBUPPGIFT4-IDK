@@ -29,8 +29,12 @@ body{
     display: none;
 }
 
-.readme *{
-    display: none;
+.readme{
+    grid-area: readme;
+    *{
+        display: none;
+        margin: 10px;
+    }
 }
 
 .grid{
@@ -139,11 +143,29 @@ header{
     }
 }
 
-.readme{
-    grid-area: readme;
-    *{
-        margin: 10px;
+.readme:has(#score2){
+    display: grid;
+
+    grid-template-columns: 2.5fr 1.5fr 2fr;
+    grid-template-rows: 1fr;
+
+    grid-template-areas: 
+    "score readme2 HowToPlay";
+
+    #score2{
+        grid-area: score;
     }
+    #HowToPlay{
+        grid-area: HowToPlay;
+    }
+    #score2:before{
+        content: 'Score: ';
+        color: var(--crimson);
+    }
+    *{
+        display: block;
+    }
+
 }
 
 .button{
