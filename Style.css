@@ -173,7 +173,7 @@ header{
 }
 
 @media (min-width: 700px){
-    body *{
+    .grid{
         display: none;
     }
     body{

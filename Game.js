@@ -22,7 +22,6 @@ let foodPos = [ [Math.floor(Math.random() * 20)*10,Math.floor(Math.random() * 20
                 [Math.floor(Math.random() * 20)*10,Math.floor(Math.random() * 20)*10]];
 let maxFood = 5;
 let curFood = 5;
-let r = 0;
 
 function Snake(){
     c = document.getElementById('Game');
@@ -99,9 +98,9 @@ function Snake(){
 
 setInterval(Snake, 100);
 setInterval(WinLose, 200);
-setInterval(Score, 100)
+setInterval(Score, 100);
 
-if ((!win || !lose)){
+if (!win && !lose){
     document.addEventListener('keydown', function(event) {
         switch (event.key) {
             case "w":
@@ -138,8 +137,6 @@ if ((!win || !lose)){
                 break;
         
             default:
-                vol[0] = 0;
-                vol[1] = 0;
                 console.log(event.key)
                 break;
         }
@@ -197,6 +194,7 @@ function Restart(){
     win = false;
     lose = false;
     started = true;
+    console.log(started);
     length = 1;
     prevPos =   [ 
         [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10], [-10,-10],
@@ -210,6 +208,7 @@ function Restart(){
                 [Math.floor(Math.random() * 20)*10,Math.floor(Math.random() * 20)*10]];
     curFood = 5;
     document.getElementById('winLose').style.display = "none";
+    console.log(started);
 }
 
 function Food(){
@@ -219,6 +218,12 @@ function Food(){
         console.log("y = " + y + "; x = " + x);
     
         foodPos[curFood] = [x,y];
+        for (let i = 0; i < maxL; i++){
+            if (foodPos[curFood] == prevPos[i]){
+                Food();
+                break;
+            }
+        }
         curFood++;
     }
 }
