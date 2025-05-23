@@ -161,7 +161,12 @@ function Score(){
 }
 
 function WinLose(){
-    if (win){
+    if(!started){
+        document.getElementById('top').innerHTML = "Not Started";
+        document.getElementById('score').style.display = "none";
+        document.getElementById('winLose').style.display = "flex";
+    }
+    else if (win){
         document.getElementById('top').innerHTML = "Win";
         document.getElementById('score').style.display = "block";
         document.getElementById('winLose').style.display = "flex";
@@ -175,11 +180,6 @@ function WinLose(){
         document.getElementById('winLose').style.display = "flex";
         document.getElementById('restart').innerHTML = "Restart";
     } 
-    else if(!started){
-        document.getElementById('top').innerHTML = "Not Started";
-        document.getElementById('score').style.display = "none";
-        document.getElementById('winLose').style.display = "flex";
-    }
 }
 
 function Restart(){
@@ -244,4 +244,32 @@ function DrawFood(x, y){
     ctx.fillStyle = "#fea"
 
     ctx.fillRect(x, y, 10, 10);
+}
+
+function Up(){
+    if (!win && !lose){
+        vol[0] = 0;
+        vol[1] = vol[1] == 10 ? 10 : -10;
+    }
+}
+
+function Down(){
+    if (!win && !lose){
+        vol[0] = 0;
+        vol[1] = vol[1] == -10 ? -10 : 10;
+    }
+}
+
+function Left(){
+    if (!win && !lose){
+        vol[0] = vol[0] == 10 ? 10 : -10;
+        vol[1] = 0;
+    }
+}
+
+function Right(){
+    if (!win && !lose){
+        vol[0] = vol[0] == -10 ? -10 : 10;
+        vol[1] = 0;
+    }
 }

@@ -143,14 +143,14 @@ header{
     }
 }
 
-.readme:has(#score2){
+.readme:has(#score2, #HowToPlay, #controls){
     display: grid;
 
     grid-template-columns: 2.5fr 1.5fr 2fr;
     grid-template-rows: 1fr;
 
     grid-template-areas: 
-    "score readme2 HowToPlay";
+    "score Controls HowToPlay";
 
     #score2{
         grid-area: score;
@@ -161,6 +161,36 @@ header{
     #score2:before{
         content: 'Score: ';
         color: var(--crimson);
+    }
+    #controls{
+        grid-area: Controls;
+
+        display: grid;
+        grid-template-columns: 70px 70px 70px;
+        grid-template-rows: 70px 70px;
+
+        grid-template-areas: 
+        ". Up ."
+        "Left Down Right";
+
+        .up{
+            grid-area: Up;
+        }
+        .left{
+            grid-area: Left;
+        }
+        .down{
+            grid-area: Down;
+        }
+        .right{
+            grid-area: Right;
+        }
+        *{
+            display: flex;
+            margin: 5px;
+            justify-content: center;
+            align-items: center;
+        }
     }
     *{
         display: block;
